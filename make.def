@@ -36,12 +36,12 @@ FLINK	= $(F77)
 #---------------------------------------------------------------------------
 # These macros are passed to the linker 
 #---------------------------------------------------------------------------
-F_LIB  = -lgomp -lxtern-annot -lrt
+F_LIB  = -lgomp -lrt
 
 #---------------------------------------------------------------------------
 # These macros are passed to the compiler 
 #---------------------------------------------------------------------------
-F_INC = -I$(XTER_ROOT)/include
+F_INC =
 
 #---------------------------------------------------------------------------
 # Global *compile time* flags for Fortran programs
@@ -52,7 +52,7 @@ FFLAGS	= -O -g -fopenmp
 # Global *link time* flags. Flags for increasing maximum executable 
 # size usually go here. 
 #---------------------------------------------------------------------------
-FLINKFLAGS = -O -g -fopenmp -L$(XTERN_ROOT)/apps/openmp/install/lib -Wl,--rpath,$(XTERN_ROOT)/apps/openmp/install/lib -L../ -Wl,--rpath,$(XTERN_ROOT)/apps/openmp/install/lib64 -L$(XTERN_ROOT)/dync_hook -Wl,--rpath,$(XTERN_ROOT)/dync_hook
+FLINKFLAGS = -O -g -fopenmp
 
 
 #---------------------------------------------------------------------------

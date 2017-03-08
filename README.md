@@ -24,7 +24,7 @@ The original eight benchmarks specified in NPB 1 mimic the computation and data 
 
 ### Pre-requisites
 ```
-sudo apt-get install mpich2
+sudo apt-get install libopenmpi-dev openmpi-bin gfortran
 ```
 
 ## MPI version
@@ -32,39 +32,6 @@ MPI: Spawn processes across physically-different nodes in a cluster environment
 ### compilation
 
 Before compilation, one needs to check the configuration file 'make.def' in the config directory and modify the file if necessary. If it does not (yet) exist, copy 'make.def.template' or one of the sample files in the NAS.samples subdirectory to 'make.def' and edit the content for site- and machine-specific data.
-```
-#---------------------------------------------------------------------------
-# This is the fortran compiler used for MPI programs
-#---------------------------------------------------------------------------
-MPIF77 = mpif77
-
-#---------------------------------------------------------------------------
-# These macros are passed to the linker to help link with MPI correctly
-#---------------------------------------------------------------------------
-FMPI_LIB  = -L/usr/local/lib -lmpi
-
-#---------------------------------------------------------------------------
-# These macros are passed to the compiler to help find 'mpif.h'
-#---------------------------------------------------------------------------
-FMPI_INC = -I/usr/local/include
-
-#---------------------------------------------------------------------------
-# This is the C compiler used for MPI programs
-#---------------------------------------------------------------------------
-MPICC = mpicc
-# This links MPI C programs; usually the same as ${MPICC}
-CLINK	= $(MPICC)
-
-#---------------------------------------------------------------------------
-# These macros are passed to the linker to help link with MPI correctly
-#---------------------------------------------------------------------------
-CMPI_LIB  = -L/usr/local/lib -lmpi
-
-#---------------------------------------------------------------------------
-# These macros are passed to the compiler to help find 'mpi.h'
-#---------------------------------------------------------------------------
-CMPI_INC = -I/usr/local/include
-```
 
 To build a whole suite, you can type "make suite".
 Make will build all the benchmarks specified in file "config/suite.def".
