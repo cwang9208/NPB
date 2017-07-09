@@ -6,15 +6,26 @@ The NAS Parallel Benchmarks (NPB) are a small set of programs designed to help e
 ### Benchmark Specifications
 The original eight benchmarks specified in NPB 1 mimic the computation and data movement in CFD applications:
 - five kernels
- - IS - Integer Sort, random memory access
- - EP - Embarrassingly Parallel
- - CG - Conjugate Gradient, irregular memory access and communication
- - MG - Multi-Grid on a sequence of meshes, long- and short-distance communication, memory intensive
- - FT - discrete 3D fast Fourier Transform, all-to-all communication
+  - IS - Integer Sort, random memory access
+  - EP - Embarrassingly Parallel
+  - CG - Conjugate Gradient, irregular memory access and communication
+  - MG - Multi-Grid on a sequence of meshes, long- and short-distance communication, memory intensive
+  - FT - discrete 3D fast Fourier Transform, all-to-all communication
 - three pseudo applications
- - BT - Block Tri-diagonal solver
- - SP - Scalar Penta-diagonal solver
- - LU - Lower-Upper Gauss-Seidel solver
+  - BT - Block Tri-diagonal solver
+  - SP - Scalar Penta-diagonal solver
+  - LU - Lower-Upper Gauss-Seidel solver
+
+Multi-zone versions of NPB (NPB-MZ) are designed to exploit multiple levels of parallelism in applications and to test the effectiveness of multi-level and hybrid parallelization paradigms and tools.
+
+Benchmarks for unstructured computation, parallel I/O, and data movement
+- BT-IO - test of different parallel I/O techniques
+
+### Documents on benchmark specifications:
+The BTIO benchmark tool is the responsible to evaluate the storage performance. The BTIO version of the benchmark uses the same computational method, but with the addition that results must be written to disk at every fifth time step. There are different versions of BTIO, which are described as below:
+- BTIO-full-mpiio: uses MPI-IO file operations with *collective buffering*, which means that data blocks are potentially re-ordered previously to being written to disk, resulting in coarser write granularity.
+- BTIO-simple-mpiio: Also uses MPI-IO operations, but no data re-ordering is performed, resulting in a high number of seeks when storing information on the file system.
+- BT-epio: In this version each node writes in a separate file. This test gives the optimal writes performance that can be obtained, because the file isn't shared by all the processes, so there is no lock restrictions.
 
 ### Benchmark Classes
 - Class S: small for quick test purposes
